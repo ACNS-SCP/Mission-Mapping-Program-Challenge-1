@@ -22,6 +22,7 @@ o   THIS PROGRAM SHOULD BE TEXT ONLY. Save the points, lines, and circles to o
  
 
 Extra Credit
+
 o   A User should be able to delete a point, line, or circle by referencing its unique name.
 
 o   A user should be able to edit a point, line, or circle by referencing its unique name.
