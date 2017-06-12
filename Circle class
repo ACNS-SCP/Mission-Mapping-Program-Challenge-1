@@ -1,0 +1,51 @@
+//Work in progress
+//Also gives out area for s's and g's
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mission_Mapping
+{
+    class Circle
+    {
+        public string name;
+        public double latitude;       
+        public double longitude;       
+        public double radius;
+        public double area;
+        public string metric;
+
+        public Circle()
+        {
+            this.name = "Unk";
+            this.latitude = 0;            
+            this.longitude = 0;           
+            this.radius = 0;
+            this.area = 0;
+            this.metric = "Unk";
+        }        
+
+        public Circle(string newName, double newLatitude, double newLongitude, double rad, string m)
+        {
+            this.name = newName;
+            this.latitude = newLatitude;            
+            this.longitude = newLongitude;           
+            this.radius = rad;
+            this.metric = m;
+        }
+
+        public void rename(string newName)
+        {
+            this.name = newName;
+        }
+
+        public double getArea()
+        {
+            this.area = Math.Round((3.14159 * this.radius * this.radius), 4);
+            return area;
+        }
+    }
+}
