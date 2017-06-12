@@ -2,11 +2,10 @@
 The First Mission Mapping Program Challenge!
 
 ##Goldstein Status
-###All minimum requirements met.
-###No error handling yet. 
-###Uses a GUI.. sorry.
-
-Have not accomplished extra credit.
+##All minimum requirements met.
+##No error handling yet. 
+##Uses a GUI.. sorry.
+##Have not accomplished extra credit.
 
 Extra Credit
 
