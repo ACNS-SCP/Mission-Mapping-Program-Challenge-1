@@ -12,47 +12,23 @@ namespace Mission_Mapping
     {
         public string name;
         public double latitude;
-        public string latNS;
         public double longitude;
-        public string longEW;
 
         public Point()
         {
             this.name = "Unk";
             this.latitude = 0;
-            this.latNS = "Unk";
             this.longitude = 0;
-            this.longEW = "Unk";
-        }
+        }        
 
-        public Point(string newName)
-        {
-            this.name = newName;
-            this.latitude = 0;
-            this.latNS = "Unk";
-            this.longitude = 0;
-            this.longEW = "Unk";
-        }
-
-        public Point(string newName, double newLatitude, string NS)
+        public Point(string newName, double newLatitude, double newLongitude)
         {
             this.name = newName;
             this.latitude = newLatitude;
-            this.latNS = NS;
-            this.longitude = 0;
-            this.longEW = "Unk";
-        }
-
-        public Point(string newName, double newLatitude, string NS, double newLongitude, string EW)
-        {
-            this.name = newName;
-            this.latitude = newLatitude;
-            this.latNS = NS;
             this.longitude = newLongitude;
-            this.longEW = EW;
         }
 
-        public void Rename(string newName)
+        public void rename(string newName)
         {
             this.name = newName;
         }
