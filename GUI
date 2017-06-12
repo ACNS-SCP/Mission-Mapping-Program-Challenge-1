@@ -1,0 +1,675 @@
+namespace Mission_Mapping
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnPoint = new System.Windows.Forms.Button();
+            this.btnLine = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.txtPtName = new System.Windows.Forms.TextBox();
+            this.txtPtLatitude = new System.Windows.Forms.TextBox();
+            this.txtPtLongitude = new System.Windows.Forms.TextBox();
+            this.lblPtName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtLnName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLnStartLatitude = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtLnStartLongitude = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtLnEndLatitude = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtLnEndLongitude = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Points = new System.Windows.Forms.TabPage();
+            this.lstPoints = new System.Windows.Forms.ListView();
+            this.Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Latitude = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Longitude = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Lines = new System.Windows.Forms.TabPage();
+            this.lstLines = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Circles = new System.Windows.Forms.TabPage();
+            this.lstCircle = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lstCircles = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboCircleMetric = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtCircleRadius = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtCircleLongitude = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCircleLatitude = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCircleName = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1.SuspendLayout();
+            this.Points.SuspendLayout();
+            this.Lines.SuspendLayout();
+            this.Circles.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnPoint
+            // 
+            this.btnPoint.Location = new System.Drawing.Point(83, 104);
+            this.btnPoint.Name = "btnPoint";
+            this.btnPoint.Size = new System.Drawing.Size(129, 20);
+            this.btnPoint.TabIndex = 0;
+            this.btnPoint.Text = "Add Point";
+            this.btnPoint.UseVisualStyleBackColor = true;
+            this.btnPoint.Click += new System.EventHandler(this.btnPoint_Click);
+            // 
+            // btnLine
+            // 
+            this.btnLine.Location = new System.Drawing.Point(88, 160);
+            this.btnLine.Name = "btnLine";
+            this.btnLine.Size = new System.Drawing.Size(129, 23);
+            this.btnLine.TabIndex = 1;
+            this.btnLine.Text = "Add Line";
+            this.btnLine.UseVisualStyleBackColor = true;
+            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.Location = new System.Drawing.Point(83, 129);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(134, 23);
+            this.btnCircle.TabIndex = 2;
+            this.btnCircle.Text = "Add Circle";
+            this.btnCircle.UseVisualStyleBackColor = true;
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // txtPtName
+            // 
+            this.txtPtName.Location = new System.Drawing.Point(83, 25);
+            this.txtPtName.Name = "txtPtName";
+            this.txtPtName.Size = new System.Drawing.Size(129, 20);
+            this.txtPtName.TabIndex = 3;
+            // 
+            // txtPtLatitude
+            // 
+            this.txtPtLatitude.Location = new System.Drawing.Point(83, 51);
+            this.txtPtLatitude.Name = "txtPtLatitude";
+            this.txtPtLatitude.Size = new System.Drawing.Size(129, 20);
+            this.txtPtLatitude.TabIndex = 4;
+            this.txtPtLatitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPtLatitude_KeyPress);
+            // 
+            // txtPtLongitude
+            // 
+            this.txtPtLongitude.Location = new System.Drawing.Point(83, 77);
+            this.txtPtLongitude.Name = "txtPtLongitude";
+            this.txtPtLongitude.Size = new System.Drawing.Size(129, 20);
+            this.txtPtLongitude.TabIndex = 6;
+            this.txtPtLongitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPtLongitude_KeyPress);
+            // 
+            // lblPtName
+            // 
+            this.lblPtName.AutoSize = true;
+            this.lblPtName.Location = new System.Drawing.Point(6, 26);
+            this.lblPtName.Name = "lblPtName";
+            this.lblPtName.Size = new System.Drawing.Size(65, 13);
+            this.lblPtName.TabIndex = 8;
+            this.lblPtName.Text = "Point Name:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Latitude:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Longitude:";
+            // 
+            // txtLnName
+            // 
+            this.txtLnName.Location = new System.Drawing.Point(88, 29);
+            this.txtLnName.Name = "txtLnName";
+            this.txtLnName.Size = new System.Drawing.Size(129, 20);
+            this.txtLnName.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Start Longitude:";
+            // 
+            // txtLnStartLatitude
+            // 
+            this.txtLnStartLatitude.Location = new System.Drawing.Point(88, 55);
+            this.txtLnStartLatitude.Name = "txtLnStartLatitude";
+            this.txtLnStartLatitude.Size = new System.Drawing.Size(129, 20);
+            this.txtLnStartLatitude.TabIndex = 13;
+            this.txtLnStartLatitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Start Latitude:";
+            // 
+            // txtLnStartLongitude
+            // 
+            this.txtLnStartLongitude.Location = new System.Drawing.Point(88, 81);
+            this.txtLnStartLongitude.Name = "txtLnStartLongitude";
+            this.txtLnStartLongitude.Size = new System.Drawing.Size(129, 20);
+            this.txtLnStartLongitude.TabIndex = 15;
+            this.txtLnStartLongitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Line Name:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 137);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "End Longitude:";
+            // 
+            // txtLnEndLatitude
+            // 
+            this.txtLnEndLatitude.Location = new System.Drawing.Point(88, 108);
+            this.txtLnEndLatitude.Name = "txtLnEndLatitude";
+            this.txtLnEndLatitude.Size = new System.Drawing.Size(129, 20);
+            this.txtLnEndLatitude.TabIndex = 20;
+            this.txtLnEndLatitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 111);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "End Latitude:";
+            // 
+            // txtLnEndLongitude
+            // 
+            this.txtLnEndLongitude.Location = new System.Drawing.Point(88, 134);
+            this.txtLnEndLongitude.Name = "txtLnEndLongitude";
+            this.txtLnEndLongitude.Size = new System.Drawing.Size(129, 20);
+            this.txtLnEndLongitude.TabIndex = 22;
+            this.txtLnEndLongitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.Points);
+            this.tabControl1.Controls.Add(this.Lines);
+            this.tabControl1.Controls.Add(this.Circles);
+            this.tabControl1.Location = new System.Drawing.Point(240, 42);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(482, 466);
+            this.tabControl1.TabIndex = 26;
+            // 
+            // Points
+            // 
+            this.Points.Controls.Add(this.lstPoints);
+            this.Points.Location = new System.Drawing.Point(4, 22);
+            this.Points.Name = "Points";
+            this.Points.Padding = new System.Windows.Forms.Padding(3);
+            this.Points.Size = new System.Drawing.Size(474, 440);
+            this.Points.TabIndex = 0;
+            this.Points.Text = "Points";
+            this.Points.UseVisualStyleBackColor = true;
+            // 
+            // lstPoints
+            // 
+            this.lstPoints.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Name,
+            this.Latitude,
+            this.Longitude});
+            this.lstPoints.Location = new System.Drawing.Point(1, 1);
+            this.lstPoints.MultiSelect = false;
+            this.lstPoints.Name = "lstPoints";
+            this.lstPoints.Size = new System.Drawing.Size(471, 439);
+            this.lstPoints.TabIndex = 0;
+            this.lstPoints.UseCompatibleStateImageBehavior = false;
+            this.lstPoints.View = System.Windows.Forms.View.Details;
+            // 
+            // Name
+            // 
+            this.Name.Text = "Name";
+            this.Name.Width = 89;
+            // 
+            // Latitude
+            // 
+            this.Latitude.Text = "Latitude";
+            this.Latitude.Width = 92;
+            // 
+            // Longitude
+            // 
+            this.Longitude.Text = "Longitude";
+            this.Longitude.Width = 95;
+            // 
+            // Lines
+            // 
+            this.Lines.Controls.Add(this.lstLines);
+            this.Lines.Location = new System.Drawing.Point(4, 22);
+            this.Lines.Name = "Lines";
+            this.Lines.Padding = new System.Windows.Forms.Padding(3);
+            this.Lines.Size = new System.Drawing.Size(474, 440);
+            this.Lines.TabIndex = 1;
+            this.Lines.Text = "Lines";
+            this.Lines.UseVisualStyleBackColor = true;
+            // 
+            // lstLines
+            // 
+            this.lstLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader14});
+            this.lstLines.Location = new System.Drawing.Point(0, 1);
+            this.lstLines.MultiSelect = false;
+            this.lstLines.Name = "lstLines";
+            this.lstLines.Size = new System.Drawing.Size(473, 439);
+            this.lstLines.TabIndex = 1;
+            this.lstLines.UseCompatibleStateImageBehavior = false;
+            this.lstLines.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 58;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Latitude 1";
+            this.columnHeader2.Width = 67;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Longitude 2";
+            this.columnHeader3.Width = 77;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Latitude 2";
+            this.columnHeader7.Width = 67;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Longitude 2";
+            this.columnHeader8.Width = 79;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Midpoint";
+            this.columnHeader14.Width = 119;
+            // 
+            // Circles
+            // 
+            this.Circles.Controls.Add(this.lstCircle);
+            this.Circles.Controls.Add(this.lstCircles);
+            this.Circles.Location = new System.Drawing.Point(4, 22);
+            this.Circles.Name = "Circles";
+            this.Circles.Size = new System.Drawing.Size(474, 440);
+            this.Circles.TabIndex = 2;
+            this.Circles.Text = "Circles";
+            this.Circles.UseVisualStyleBackColor = true;
+            // 
+            // lstCircle
+            // 
+            this.lstCircle.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13});
+            this.lstCircle.Location = new System.Drawing.Point(0, 2);
+            this.lstCircle.MultiSelect = false;
+            this.lstCircle.Name = "lstCircle";
+            this.lstCircle.Size = new System.Drawing.Size(473, 438);
+            this.lstCircle.TabIndex = 2;
+            this.lstCircle.UseCompatibleStateImageBehavior = false;
+            this.lstCircle.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Name";
+            this.columnHeader9.Width = 89;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Latitude";
+            this.columnHeader10.Width = 92;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Longitude";
+            this.columnHeader11.Width = 95;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Radius";
+            this.columnHeader12.Width = 79;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Area";
+            this.columnHeader13.Width = 113;
+            // 
+            // lstCircles
+            // 
+            this.lstCircles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lstCircles.Location = new System.Drawing.Point(2, 1);
+            this.lstCircles.Name = "lstCircles";
+            this.lstCircles.Size = new System.Drawing.Size(471, 185);
+            this.lstCircles.TabIndex = 1;
+            this.lstCircles.UseCompatibleStateImageBehavior = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblPtName);
+            this.groupBox1.Controls.Add(this.txtPtLongitude);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtPtLatitude);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.btnPoint);
+            this.groupBox1.Controls.Add(this.txtPtName);
+            this.groupBox1.Location = new System.Drawing.Point(12, 42);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(222, 133);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Points";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.btnLine);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.txtLnStartLongitude);
+            this.groupBox2.Controls.Add(this.txtLnEndLatitude);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtLnStartLatitude);
+            this.groupBox2.Controls.Add(this.txtLnEndLongitude);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txtLnName);
+            this.groupBox2.Location = new System.Drawing.Point(12, 181);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(222, 197);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Lines";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cboCircleMetric);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtCircleRadius);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.btnCircle);
+            this.groupBox3.Controls.Add(this.txtCircleLongitude);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.txtCircleLatitude);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.txtCircleName);
+            this.groupBox3.Location = new System.Drawing.Point(12, 384);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(222, 162);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Circles";
+            // 
+            // cboCircleMetric
+            // 
+            this.cboCircleMetric.FormattingEnabled = true;
+            this.cboCircleMetric.Items.AddRange(new object[] {
+            "Mi",
+            "KM"});
+            this.cboCircleMetric.Location = new System.Drawing.Point(173, 103);
+            this.cboCircleMetric.Name = "cboCircleMetric";
+            this.cboCircleMetric.Size = new System.Drawing.Size(43, 21);
+            this.cboCircleMetric.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 104);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Radius:";
+            // 
+            // txtCircleRadius
+            // 
+            this.txtCircleRadius.Location = new System.Drawing.Point(83, 103);
+            this.txtCircleRadius.Name = "txtCircleRadius";
+            this.txtCircleRadius.Size = new System.Drawing.Size(84, 20);
+            this.txtCircleRadius.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Point Name:";
+            // 
+            // txtCircleLongitude
+            // 
+            this.txtCircleLongitude.Location = new System.Drawing.Point(83, 77);
+            this.txtCircleLongitude.Name = "txtCircleLongitude";
+            this.txtCircleLongitude.Size = new System.Drawing.Size(134, 20);
+            this.txtCircleLongitude.TabIndex = 6;
+            this.txtCircleLongitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 54);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Latitude:";
+            // 
+            // txtCircleLatitude
+            // 
+            this.txtCircleLatitude.Location = new System.Drawing.Point(83, 51);
+            this.txtCircleLatitude.Name = "txtCircleLatitude";
+            this.txtCircleLatitude.Size = new System.Drawing.Size(134, 20);
+            this.txtCircleLatitude.TabIndex = 4;
+            this.txtCircleLatitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLnStartLatitude_KeyPress);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Longitude:";
+            // 
+            // txtCircleName
+            // 
+            this.txtCircleName.Location = new System.Drawing.Point(83, 25);
+            this.txtCircleName.Name = "txtCircleName";
+            this.txtCircleName.Size = new System.Drawing.Size(134, 20);
+            this.txtCircleName.TabIndex = 3;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(731, 24);
+            this.menuStrip1.TabIndex = 30;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(731, 554);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Text = "Mission Mapping";
+            this.tabControl1.ResumeLayout(false);
+            this.Points.ResumeLayout(false);
+            this.Lines.ResumeLayout(false);
+            this.Circles.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnPoint;
+        private System.Windows.Forms.Button btnLine;
+        private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.TextBox txtPtName;
+        private System.Windows.Forms.TextBox txtPtLongitude;
+        private System.Windows.Forms.Label lblPtName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtLnName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtLnStartLatitude;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtLnStartLongitude;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtLnEndLatitude;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtLnEndLongitude;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage Lines;
+        private System.Windows.Forms.TabPage Circles;
+        private System.Windows.Forms.ListView lstCircles;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.TabPage Points;
+        private System.Windows.Forms.ListView lstPoints;
+        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader Latitude;
+        private System.Windows.Forms.ColumnHeader Longitude;
+        private System.Windows.Forms.ListView lstLines;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ListView lstCircle;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox cboCircleMetric;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtCircleRadius;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtCircleLongitude;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtCircleLatitude;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtCircleName;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        protected internal System.Windows.Forms.TextBox txtPtLatitude;
+    }
+}
+
