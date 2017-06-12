@@ -12,66 +12,57 @@ namespace Mission_Mapping
     {
         public string name;
         public double latitude1;
-        public string lat1NS;
         public double longitude1;
-        public string long1EW;
         public double latitude2;
-        public string lat2NS;
         public double longitude2;
-        public string long2EW;
+        public double midpointLat;
+        public double midpointLong;
 
         public Line()
         {
             this.name = "Unk";
             this.latitude1 = 0;
-            this.lat1NS = "Unk";
             this.longitude1 = 0;
-            this.long1EW = "Unk";
         }
 
-        public Line(string newName)
-        {
-            this.name = newName;
-            this.latitude1 = 0;
-            this.lat1NS = "Unk";
-            this.longitude1 = 0;
-            this.long1EW = "Unk";
-        }
-
-        public Line(string newName, double newLatitude, string NS)
-        {
-            this.name = newName;
-            this.latitude1 = newLatitude;
-            this.lat1NS = NS;
-            this.longitude1 = 0;
-            this.long1EW = "Unk";
-        }
-
-        public Line(string newName, double newLatitude, string NS, double newLongitude, string EW)
-        {
-            this.name = newName;
-            this.latitude1 = newLatitude;
-            this.lat1NS = NS;
-            this.longitude1 = newLongitude;
-            this.long1EW = EW;
-        }
-
-        public Line(string newName, double newLatitude1, string NS1, double newLongitude1, string EW1, double newLatitude2, string NS2, double newLongitude2, string EW2)
+        public Line(string newName, double newLatitude1, double newLongitude1, double newLatitude2, double newLongitude2)
         {
             this.name = newName;
             this.latitude1 = newLatitude1;
-            this.lat1NS = NS1;
             this.longitude1 = newLongitude1;
-            this.long1EW = EW1;
             this.latitude2 = newLatitude2;
-            this.lat2NS = NS2;
             this.longitude2 = newLongitude2;
-            this.long2EW = EW2;
         }
 
-        public void Rename(string newName)
+        public void rename(string newName)
         {
             this.name = newName;
+        }
+
+        public string midPoint(double lat1, double lon1, double lat2, double lon2)
+        {
+            //http:// stackoverflow.com/questions/4656802/midpoint-between-two-latitude-and-longitude
+            double dLon = (lon2 - lon1) * Math.PI / 180.0;
+
+            //convert to radians
+            lat1 = Math.PI * lat1 / 180.0;
+            lat2 = Math.PI * lat2 / 180.0;
+            lon1 = Math.PI * lon1 / 180.0;
+            
+            double Bx = Math.Cos(lat2) * Math.Cos(dLon);
+            double By = Math.Cos(lat2) * Math.Sin(dLon);
+            double lat3 = Math.Atan2(Math.Sin(lat1) + Math.Sin(lat2), Math.Sqrt((Math.Cos(lat1) + Bx) * (Math.Cos(lat1) + Bx) + By * By));
+            double lon3 = lon1 + Math.Atan2(By, Math.Cos(lat1) + Bx);
+
+            lat3 = lat3 * (180 / Math.PI);
+            lon3 = lon3 * (180 / Math.PI);
+
+            this.midpointLat = Math.Round(lat3, 4);
+            this.midpointLong = Math.Round(lon3, 4);
+
+            string output = midpointLat.ToString() + ", " + midpointLong.ToString();
+
+            return output;
         }
     }
 }
