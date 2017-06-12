@@ -1,4 +1,5 @@
 //Work in progress
+//No error handling
 
 using System;
 using System.Collections.Generic;
@@ -21,31 +22,102 @@ namespace Mission_Mapping
 
         public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void btnPoint_Click(object sender, EventArgs e)
         {
-            Point newPoint = new Point(txtPtName.Text, double.Parse(txtPtLatitude.Text), cboPtNS.Text, double.Parse(txtPtLongitude.Text), cboPtEW.Text);
+            //if (txtPtName.Text != "" && txtL)
+            Point newPoint = new Point(txtPtName.Text, double.Parse(txtPtLatitude.Text), double.Parse(txtPtLongitude.Text));
             arrPoints.Add(newPoint);
             lstPoints.Items.Clear();
-
+            
             foreach (Point p in arrPoints)
             {
-                lstPoints.Items.Add("Name: " + p.name + " Latitude: " + p.latitude.ToString() + p.latNS + " Longitude:  " + p.longitude.ToString() + p.longEW);
+                ListViewItem item = new ListViewItem();
+                item.Text = p.name;
+                item.SubItems.Add(p.latitude.ToString());
+                item.SubItems.Add(p.longitude.ToString());
+                lstPoints.Items.Add(item);
             }
+
+            txtPtLatitude.Clear();
+            txtPtLongitude.Clear();
+            txtPtLatitude.Clear();
+            txtPtName.Clear();
+            tabControl1.SelectTab(Points);
         }
 
         private void btnLine_Click(object sender, EventArgs e)
         {
-            Line newLine = new Line(txtLnName.Text, double.Parse(txtLnStartLatitude.Text), cboLnStNS.Text, double.Parse(txtLnStartLongitude.Text), cboLnStEW.Text, double.Parse(txtLnEndLatitude.Text), cboLnEndNS.Text, double.Parse(txtLnEndLongitude.Text), cboLnEndEW.Text);
+            Line newLine = new Line(txtLnName.Text, double.Parse(txtLnStartLatitude.Text), double.Parse(txtLnStartLongitude.Text), double.Parse(txtLnEndLatitude.Text), double.Parse(txtLnEndLongitude.Text));
             arrLines.Add(newLine);
             lstLines.Items.Clear();
 
             foreach (Line l in arrLines)
             {
-                lstLines.Items.Add("Name: " + l.name + " Latitude 1: " + l.latitude1.ToString() + l.lat1NS + " Longitude 1:  " + l.longitude1.ToString() + l.long1EW + " Latitude 2: " + l.latitude2.ToString() + l.lat2NS + " Longitude 2: " + l.longitude2.ToString() + l.long2EW);
+                ListViewItem item = new ListViewItem();
+                item.Text = l.name;
+                item.SubItems.Add(l.latitude1.ToString());
+                item.SubItems.Add(l.longitude1.ToString());
+                item.SubItems.Add(l.latitude2.ToString());
+                item.SubItems.Add(l.longitude2.ToString());
+                item.SubItems.Add(l.midPoint(l.latitude1, l.longitude1, l.latitude2, l.longitude2));
+                lstLines.Items.Add(item);
             }
+
+            txtLnEndLatitude.Clear();
+            txtLnEndLongitude.Clear();
+            txtLnStartLatitude.Clear();
+            txtLnStartLongitude.Clear();
+            txtLnName.Clear();
+
+            tabControl1.SelectTab(Lines);
+        }
+
+        private void btnCircle_Click(object sender, EventArgs e)
+        {
+            Circle newCircle = new Circle(txtCircleName.Text, double.Parse(txtCircleLatitude.Text), double.Parse(txtCircleLongitude.Text), double.Parse(txtCircleRadius.Text), cboCircleMetric.Text);
+            arrCircles.Add(newCircle);
+            lstCircle.Items.Clear();
+
+            foreach (Circle c in arrCircles)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = c.name;
+                item.SubItems.Add(c.latitude.ToString());
+                item.SubItems.Add(c.longitude.ToString());
+                item.SubItems.Add(c.radius.ToString());
+                item.SubItems.Add(c.getArea().ToString() + " " + c.metric);
+
+                lstCircle.Items.Add(item);
+            }
+
+            txtCircleLatitude.Clear();
+            txtCircleLongitude.Clear();
+            txtCircleName.Clear();
+            txtCircleRadius.Clear();
+            cboCircleMetric.Text = "";
+
+            tabControl1.SelectTab(Circles);
+        }
+
+        private void txtPtLatitude_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Decimal) || (e.KeyChar == (char)Keys.Subtract))
+                e.Handled = true;
+        }
+
+        private void txtPtLongitude_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Decimal) || (e.KeyChar == (char)Keys.Subtract))
+                e.Handled = true;
+        }
+
+        private void txtLnStartLatitude_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Decimal) || (e.KeyChar == (char)Keys.Subtract))
+                e.Handled = true;
         }
     }
 }
