@@ -45,7 +45,7 @@ namespace MappingStageOne
                     else if (!double.TryParse(txtEndLat.Text, out endLat))
                         errProvider.SetError(txtEndLat, "You must provide an end-point latitude.");
                     else if (!double.TryParse(txtEndLong.Text, out endLong))
-                        errProvider.SetError(txtEndLat, "You must provide an end-point longitude.");
+                        errProvider.SetError(txtEndLong, "You must provide an end-point longitude.");
                     else
                     {
                         List<MapPoints> linePoints = new List<MapPoints>();
@@ -206,9 +206,9 @@ namespace MappingStageOne
         {
             double midLat, midLong;
             if (!double.TryParse(txtMidLat.Text, out midLat))
-                errProvider.SetError(txtEndLat, "You must provide a mid-point latitude.");
+                errProvider.SetError(txtMidLat, "You must provide a mid-point latitude.");
             else if (!double.TryParse(txtMidLong.Text, out midLong))
-                errProvider.SetError(txtEndLat, "You must provide a mid-point longitude.");
+                errProvider.SetError(txtMidLong, "You must provide a mid-point longitude.");
             else
                 lstMidPoints.Items.Add(txtMidLat.Text + ", " + txtMidLong.Text);
         }
