@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mission.Planning
 {
-  class routine
+  static class routine
   {
     //This is simply proof of concept, the actual program would utilize System.Data which this IDE does not have the ability to import.
     //will rewrite this when we get the devland up and running using the proper libraries. 
@@ -12,7 +12,7 @@ namespace Mission.Planning
     static void Main()
     {
       Console.WriteLine(data.Length);
-      Console.WriteLine("Enter 'new' or 'display'?");
+      Console.WriteLine("Enter 'new' or 'display' or 'remove'");
         string in1 = Console.ReadLine();
       if (in1.ToLower() == "new")
       {
@@ -55,6 +55,23 @@ namespace Mission.Planning
           }
           else Display(data, in3);
           Main();
+      }
+      else if (in1.ToLower() == "remove")
+      {
+        if (data.Length>0)
+        {
+          Console.WriteLine("Enter the unique name of the point you wish to remove.");
+          string n = Console.ReadLine();
+          int i=0;
+          foreach (string s in data)
+          {
+            if (s.Contains(n)) break;
+            else i++;
+          }
+          data = data.RemoveAt(i);
+          Main();
+        }
+        else Main();
       }
     }
     static string NewPoint()
@@ -141,12 +158,19 @@ namespace Mission.Planning
     static void ErrorCheck(string s)
     {
       foreach (char c in s)
-      if (char.IsWhiteSpace(c)==false | char.IsNumber(c)==false)
+      if (char.IsWhiteSpace(c)==true | char.IsNumber(c)==false)
       {
         Console.WriteLine("You've met a terrible fate haven't you?");
         Array.Resize(ref data, data.Length-1);
         Main();
       }
+    }
+    public static T[] RemoveAt<T>(this T[] source, int index)
+    {
+      T[] dest = new T[source.Length - 1];
+      if( index > 0 ) Array.Copy(source, 0, dest, 0, index);
+      if( index < source.Length - 1 ) Array.Copy(source, index + 1, dest, index, source.Length - index - 1);
+      return dest;
     }
   }
 }
