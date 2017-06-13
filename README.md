@@ -17,6 +17,9 @@ The First Mission Mapping Program Challenge!
 
 ✔³   THIS PROGRAM SHOULD BE TEXT ONLY. Save the points, lines, and circles to objects or an array, and display them when asked. If you can make a GUI for this, then that is awesome, but not required.
 
+1) Allows as many mid-points as the user wants, essentially can map entire routes.
+2) Program displays all points, lines and circles as soon as they are added.
+3) GUI interface, easier to manage vs tiered menu items and easier to see the data as a whole.
  
 
 Extra Credit
@@ -29,6 +32,4 @@ o   A user should be able to edit a point, line, or circle by referencing its 
 
 
 
-1) Allows as many mid-points as the user wants, essentially can map entire routes.
-2) Program displays all points, lines and circles as soon as they are added.
-3) GUI interface, easier to manage vs tiered menu items and easier to see the data as a whole.
+Most error handling is done, you may find bugs but I caught and handled most cases of potential user-error.
