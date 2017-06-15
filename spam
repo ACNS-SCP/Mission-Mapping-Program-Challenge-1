@@ -1,0 +1,220 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MissionMapping
+{
+  //Needs work. Probably organized better.
+  class MainClass
+  {
+    public static void Main()
+    {
+      string Input;
+      Console.WriteLine("Press 1 to add shapes\nPress 2 to display/delete\nPress anything else to exit");
+      Input = Console.ReadLine();
+      if (Input == "1")
+      {
+        Shapes.ShapeMain();
+      }
+      else if(Input == "2")
+      {
+        Display.DisplayMain();
+      }
+      else
+      {
+        
+        Console.WriteLine("Mission Success!\n(Save option coming soon)\n(if you want to EDIT you must remove it and add another...)");
+      }
+    }
+  }
+  class Shapes
+  {
+    public static string name = "", pointX = "", pointY = "";
+    public static Dictionary<string, string> DisplayNames = new Dictionary<string, string>();
+    public static void ShapeMain()
+    {
+      string Input;
+      Console.WriteLine("Press 1 for point\nPress 2 for line\nPress 3 for circle");
+      Input = Console.ReadLine();
+      if (Input.ToUpper() == "BACK" | Input.ToUpper() == "MENU" )
+      {
+        MainClass.Main();
+      }
+      else if (Input == "1")
+      {
+        Points();
+      }
+      else if (Input == "2")
+      {
+        Lines();
+      }
+      else if (Input == "3")
+      {
+        Circles();
+      }
+      else
+      {
+        Console.WriteLine("Invalid Input");
+        ShapeMain();
+      }
+    }
+    public static void Points()
+    {
+      Console.WriteLine("Name of point:");
+      name = Console.ReadLine();
+      Console.WriteLine("Location of point:");
+      pointX = Console.ReadLine();
+      DisplayNames.Add(name, "P - " + name + " at " + pointX);
+      Console.WriteLine("Press Y to add another");
+      if (Console.ReadLine().ToUpper() == "Y")
+      {
+        Points();
+      }
+      else
+      {
+        ShapeMain();
+      }
+    }
+    public static void Lines()
+    {
+      Console.WriteLine("Name of line:");
+      name = Console.ReadLine();
+      Console.WriteLine("Location of first point:");
+      pointX = Console.ReadLine();
+      Console.WriteLine("Location of second point:");
+      pointY = Console.ReadLine();
+      DisplayNames.Add(name, "L - " + name + " at " + pointX + " and " + pointY);
+      Console.WriteLine("Press Y to add another");
+      if (Console.ReadLine().ToUpper() == "Y")
+      {
+        Lines();
+      }
+      else
+      {
+        ShapeMain();
+      }
+    }
+    public static void Circles()
+    {
+      Console.WriteLine("Name of Circle:");
+      name = Console.ReadLine();
+      Console.WriteLine("Location of center:");
+      pointX = Console.ReadLine();
+      Console.WriteLine("Length of radius:");
+      pointY = Console.ReadLine();
+      DisplayNames.Add(name, "C - " + name + " at " + pointX + " w/ radius " + pointY);
+      Console.WriteLine("Press Y to add another");
+      if (Console.ReadLine().ToUpper() == "Y")
+      {
+        Circles();
+      }
+      else
+      {
+        ShapeMain();
+      }
+    }
+  }
+  class Display
+  {
+    public static string Input = "", name = "";
+    public static void DisplayMain()
+    {
+      Console.WriteLine("Shapes:");
+      foreach(KeyValuePair<string, string> element in  Shapes.DisplayNames)
+      {
+        Console.WriteLine("{0}", element.Value);
+      }
+      Input = Console.ReadLine();
+      if (Input.ToUpper() == "DELETE" | Input.ToUpper() == "REMOVE")
+      {
+        DeleteShapes();
+      }
+      else if (Input.ToUpper() == "ADD")
+      {
+        Shapes.ShapeMain();
+      }
+      else if (Input.ToUpper() == "SORT")
+      {
+        //Shapes.DisplayNames.Sort();
+        DisplayMain();
+      }
+      else if (Input.ToUpper() == "EDIT")
+      {
+        EditShapes();
+      }
+      else 
+      {
+        MainClass.Main();
+      }
+    }
+    public static void DeleteShapes()
+    {
+      Console.WriteLine("Name of shape to delete:");
+      name = Console.ReadLine();
+      foreach (KeyValuePair<string, string> element in Shapes.DisplayNames)
+      {
+        if (element.Key == name)
+        {
+          Shapes.DisplayNames.Remove(name);
+          DeleteShapes();
+        }
+        else
+        {
+          Console.WriteLine("Name not in database");
+          name = Console.ReadLine();
+          if (name.ToUpper() == "MENU")
+          {
+            MainClass.Main();
+          }
+          else if (name.ToUpper() == "DISPLAY")
+          {
+            DisplayMain();
+          }
+          else if(name.ToUpper() == "DELETE" | name.ToUpper() == "REMOVE")
+          {
+            DeleteShapes();
+          }
+          else
+          {
+            MainClass.Main();
+          }
+        }
+      }
+    }
+    public static void EditShapes()
+    {
+      Console.WriteLine("Name of shape to edit");
+      name = Console.ReadLine();
+      foreach (KeyValuePair<string, string> element in Shapes.DisplayNames)
+      {
+        if (element.Key == name)
+        {
+          Console.WriteLine("New Location");
+          Shapes.DisplayNames[name] = name + Console.ReadLine();
+          DisplayMain();
+        }
+        else
+        {
+          Console.WriteLine("Name not in database");
+          name = Console.ReadLine();
+          if (name.ToUpper() == "MENU")
+          {
+            MainClass.Main();
+          }
+          else if (name.ToUpper() == "EDIT")
+          {
+            EditShapes();
+          }
+          else if(name.ToUpper() == "DELETE" | name.ToUpper() == "REMOVE")
+          {
+            DeleteShapes();
+          }
+          else
+          {
+            DisplayMain();
+          }
+        }
+      }
+    }
+  }
+}
