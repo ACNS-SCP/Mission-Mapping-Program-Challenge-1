@@ -1,0 +1,299 @@
+using System;
+using System.Windows.Forms;
+using System.Xml;
+using System.Text.RegularExpressions;
+
+namespace xml_flyboy_converter
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        decimal PageTurner=0;
+        XmlDocument xmlDoc = new XmlDocument();
+        private void btnSave_Click(object sender, EventArgs e)
+        {//saves the entry
+            XmlWriter xmlWriter = XmlWriter.Create("Conversion_doc1234.xml");//instantiates the creation of .xml
+
+            xmlWriter.WriteStartDocument();//calls method that starts doc creation
+            xmlWriter.WriteStartElement("Saved_Entries");
+            for (int SavetheGoods = 0; SavetheGoods < Zebra.Length; SavetheGoods++)
+            {
+                string name = "", start = "", end = "", descri = "", shape = "", iff = "";//Variables for what they are
+                string mids = "";//seperated because it bitched abut being an unassigned value
+                string[] lines = Regex.Split(Zebra[SavetheGoods], "♥");
+                int Count=0, max = 0;//count is what seperates the different text values, max seperates the midpoints
+                foreach (string line in lines)
+                {
+                    xmlWriter.WriteStartElement("Entity");
+                    if (Count == 0)
+                    {//saves the name
+                        name = line;
+                        xmlWriter.WriteAttributeString("Name", name);
+                        //xmlWriter.WriteString(name);//Writes in name
+                        //xmlWriter.WriteEndElement();//closes element
+                    }
+                    else if (Count == 1)
+                    {//saves description
+                        descri = line;
+                        xmlWriter.WriteAttributeString("Description", descri);
+                        xmlWriter.WriteEndElement();
+                    }
+                    else if (Count == 2)
+                    {//saves IFF
+                        iff = line;
+                        xmlWriter.WriteAttributeString("IFF_Status", iff);
+                        xmlWriter.WriteEndElement();
+                    }
+                    else if (Count == 3)
+                    {//saves shape
+                        shape = line;
+                        xmlWriter.WriteAttributeString("Shape", shape);
+                        xmlWriter.WriteEndElement();
+                    }
+                    else if (Count == 4)
+                    {//saves start point
+                        start = line;
+                        xmlWriter.WriteAttributeString("Start", start);
+                        xmlWriter.WriteEndElement();
+                    }
+                    else if (Count == 5)
+                    {//saves mid points
+                        string[] MidArray = Regex.Split(line, "✓");
+                        foreach (string point in MidArray)
+                        {
+                            mids = mids + "✓" + (point);
+                            max++;
+                        }
+                        xmlWriter.WriteAttributeString("Middle_Points", mids);
+                        xmlWriter.WriteEndElement();
+                    }
+                    else if (Count == 6)
+                    {//saves end point
+                        end = line;
+                        xmlWriter.WriteAttributeString("End_Point", end);
+                        xmlWriter.WriteEndElement();
+                        xmlWriter.WriteString("");
+                        xmlWriter.WriteEndElement();
+                        //xmlWriter.WriteEndElement();
+                        mids = "";//resets mid values
+                    }
+                    Count++;
+                }
+            }
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+        string[] Zebra = new string[0];
+        int d=1;
+        string s;
+        private void Store(object sender, EventArgs e)
+        {//stores entries in array
+            if (Zebra.Length<d)
+            {
+                Array.Resize<string>(ref Zebra, Zebra.Length + 1);
+            }
+            string IFF = Convert.ToString(cmbIFF.SelectedItem);
+            string Shape = Convert.ToString(cmbShape.SelectedItem);
+            Mid = Convert.ToString(cmbMid.SelectedItem);
+            if (Mid == "")
+            {
+                Mid = "None";
+            }
+            foreach (var item in cmbMid.Items)
+            {
+                s += item+ "✓";
+            }
+            Zebra[d-1] = String.Format("{0}♥{1}♥{2}♥{3}♥{4}♥{5}♥{6}", txtName.Text, txtDescription.Text, IFF, Shape, txtStart.Text, s, txtEnd.Text);
+            MessageBox.Show(Convert.ToString(Zebra[d-1]));
+            d++;//raises the array index value
+            s = "";//clears the string value
+            ClearForm();
+            PageTurner = d;
+        }
+        private void ClearForm()
+        {//clears form
+            txtName.Text = "";
+            txtStart.Text = "";
+            txtEnd.Text = "";
+            txtDescription.Text = "";
+            cmbIFF.SelectedIndex = -1;
+            cmbShape.SelectedIndex = -1;
+            cmbMid.Items.Clear();
+            cmbMid.Text="";
+            txtName.Focus();
+        }
+        string Mid;
+        private void btnMidPoint_Click(object sender, EventArgs e)
+        {//Adds a mid point
+            cmbMid.Items.Add(cmbMid.Text);
+            Mid = Convert.ToString(cmbMid.SelectedItem);
+            //xmlDoc.Save("test-doc.xml");
+        }
+
+        private void btnRemoveMid_Click(object sender, EventArgs e)
+        {//Removes a mid point
+            cmbMid.Items.Remove(cmbMid.SelectedItem);
+            cmbMid.SelectedIndex = -1;
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {//Previous
+            if (PageTurner - 1 !=-1)
+            {
+                ClearForm();
+                PageTurner--;
+                String PageView = Zebra[Convert.ToInt64(PageTurner)];
+                ArraySplicer(PageView);
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {//Next
+            if (PageTurner+1 != Zebra.Length)
+            {
+                ClearForm();
+                PageTurner++;
+                String PageView = Zebra[Convert.ToInt64(PageTurner)];
+                ArraySplicer(PageView);
+            }
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {//Last
+            if ((PageTurner + 1 > Zebra.Length)==false)
+            {
+                ClearForm();
+                String PageView = Zebra[Zebra.Length - 1];
+                ArraySplicer(PageView);
+                PageTurner = Zebra.Length - 1;
+            }
+        }
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {//First
+            if (PageTurner - 1 != -1)
+            {
+                ClearForm();
+                String PageView = Zebra[0];
+                ArraySplicer(PageView);
+                PageTurner = 0;
+            }
+        }
+        private void ArraySplicer(string Splice)
+        {//sets the current page to correct values
+            string[] lines = Regex.Split(Splice, "♥");
+            int Count = 0, max = 0;//count is what seperates the different text values, max seperates the midpoints
+            foreach (string line in lines)
+            {
+                if (Count == 0)
+                {//sets the name
+                    txtName.Text = line;
+                }
+                else if (Count == 1)
+                {//sets description
+                    txtDescription.Text = line;
+                }
+                else if (Count == 2)
+                {//sets IFF
+                    cmbIFF.SelectedItem = line;
+                }
+                else if (Count == 3)
+                {//sets shape
+                    cmbShape.SelectedItem = line;
+                }
+                else if (Count == 4)
+                {//sets start point
+                    txtStart.Text = line;
+                }
+                else if (Count == 5)
+                {//sets mid points
+                    string[] MidArray = Regex.Split(line, "✓");
+                    foreach (string point in MidArray)
+                    {
+                        cmbMid.Items.Add(point);
+                        max++;
+                    }
+                    cmbMid.SelectedIndex = max - 1;//selects the blank value at the bottom
+                    cmbMid.Items.Remove(cmbMid.SelectedText);//removes the blank value
+                    cmbMid.SelectedIndex = -1;//selects the first value
+                }
+                else if (Count == 6)
+                {//set end point
+                    txtEnd.Text = line;
+                    return;
+                }
+                Count++;//this is the value divider
+            }
+        }
+
+        private void viewStoredDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string ShowMetheMoney = "";
+            for (int View=0; View<Zebra.Length; View++)
+            {
+                ShowMetheMoney = ShowMetheMoney+"\r\n"+Convert.ToString(Zebra[View]);
+            }
+            MessageBox.Show(ShowMetheMoney);
+        }
+
+        private void mnuOpen_Click(object sender, EventArgs e)
+        {
+            Array.Clear(Zebra, 0, Zebra.Length);
+            XmlReader xmlReader = XmlReader.Create("Conversion_doc1234.xml");
+            while (xmlReader.Read())
+            {
+                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Saved_Entries"))
+                {
+                    //Name = Convert.ToString(xmlReader.GetAttribute("Name"));
+                    if (xmlReader.ReadToDescendant("Entity"))
+                    {
+                        string name = Convert.ToString(xmlReader.GetAttribute("Name"));
+                        int Var = 0;//divides all the xml stuffper entity and adds them back into the array
+                        string Description = "", IFF = "", Shape = "", Start = "", Mid = "", End = "", Name = "";
+                        if (xmlReader.ReadToDescendant("Entity"))
+                        {
+                            do
+                            {
+                                if (Var == 0)
+                                {
+                                    Description = Convert.ToString(xmlReader.GetAttribute("Description"));
+                                }
+                                else if (Var == 1)
+                                {
+                                    IFF = Convert.ToString(xmlReader.GetAttribute("IFF_Status"));
+                                }
+                                else if (Var == 2)
+                                {
+                                    Shape = Convert.ToString(xmlReader.GetAttribute("Shape"));
+                                }
+                                else if (Var == 3)
+                                {
+                                    Start = Convert.ToString(xmlReader.GetAttribute("Start"));
+
+                                }
+                                else if (Var == 4)
+                                {
+                                    Mid = Convert.ToString(xmlReader.GetAttribute("Middle_Points"));
+                                }
+                                else if (Var == 5)
+                                {
+                                    End = Convert.ToString(xmlReader.GetAttribute("End_Point"));
+                                    MessageBox.Show(name + End + Mid + Start + Shape + IFF + Description);
+                                    //Name = Convert.ToString(xmlReader);
+                                    ////Name = Convert.ToString(xmlReader.LocalName);//gets "Entity" rather than the actual name
+                                    ////Name = Convert.ToString(xmlReader.GetAttribute("Name"));
+                                    //MessageBox.Show(Name + End + Mid + Start + Shape + IFF + Description);
+                                }
+                                Var++;
+                            } while (xmlReader.ReadToNextSibling("Entity"));
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
