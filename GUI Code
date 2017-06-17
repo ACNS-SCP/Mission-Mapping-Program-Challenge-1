@@ -46,13 +46,14 @@ namespace xml_flyboy_converter
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveToXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewStoredDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMidPoint = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnRemoveMid = new System.Windows.Forms.Button();
-            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLoadName = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,9 +218,16 @@ namespace xml_flyboy_converter
             // viewStoredDataToolStripMenuItem
             // 
             this.viewStoredDataToolStripMenuItem.Name = "viewStoredDataToolStripMenuItem";
-            this.viewStoredDataToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
-            this.viewStoredDataToolStripMenuItem.Text = "View Stored Data";
+            this.viewStoredDataToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
+            this.viewStoredDataToolStripMenuItem.Text = "View Data";
             this.viewStoredDataToolStripMenuItem.Click += new System.EventHandler(this.viewStoredDataToolStripMenuItem_Click);
+            // 
+            // mnuOpen
+            // 
+            this.mnuOpen.Name = "mnuOpen";
+            this.mnuOpen.Size = new System.Drawing.Size(88, 24);
+            this.mnuOpen.Text = "Open .xml";
+            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
             // 
             // btnMidPoint
             // 
@@ -281,18 +289,21 @@ namespace xml_flyboy_converter
             this.btnRemoveMid.UseVisualStyleBackColor = true;
             this.btnRemoveMid.Click += new System.EventHandler(this.btnRemoveMid_Click);
             // 
-            // mnuOpen
+            // lblLoadName
             // 
-            this.mnuOpen.Name = "mnuOpen";
-            this.mnuOpen.Size = new System.Drawing.Size(88, 24);
-            this.mnuOpen.Text = "Open .xml";
-            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
+            this.lblLoadName.AutoSize = true;
+            this.lblLoadName.Location = new System.Drawing.Point(128, 122);
+            this.lblLoadName.Name = "lblLoadName";
+            this.lblLoadName.Size = new System.Drawing.Size(0, 17);
+            this.lblLoadName.TabIndex = 23;
+            this.lblLoadName.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(336, 404);
+            this.Controls.Add(this.lblLoadName);
             this.Controls.Add(this.btnRemoveMid);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnNext);
@@ -354,5 +365,6 @@ namespace xml_flyboy_converter
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.Button btnRemoveMid;
         private System.Windows.Forms.ToolStripMenuItem mnuOpen;
+        private System.Windows.Forms.Label lblLoadName;
     }
 }
