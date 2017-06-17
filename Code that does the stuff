@@ -16,7 +16,6 @@ namespace xml_flyboy_converter
         private void btnSave_Click(object sender, EventArgs e)
         {//saves the entry
             XmlWriter xmlWriter = XmlWriter.Create("Conversion_doc1234.xml");//instantiates the creation of .xml
-
             xmlWriter.WriteStartDocument();//calls method that starts doc creation
             xmlWriter.WriteStartElement("Saved_Entries");
             for (int SavetheGoods = 0; SavetheGoods < Zebra.Length; SavetheGoods++)
@@ -245,16 +244,15 @@ namespace xml_flyboy_converter
             XmlReader xmlReader = XmlReader.Create("Conversion_doc1234.xml");
             while (xmlReader.Read())
             {
-                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Saved_Entries"))
+                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Entity"))
                 {
-                    //Name = Convert.ToString(xmlReader.GetAttribute("Name"));
+                    Name = Convert.ToString(xmlReader.GetAttribute("Name"));
+                    //I load the Name value into an invisble label because Name is not an accesible field within the do while loop for whatever reason
+                    lblLoadName.Text = Name;
                     if (xmlReader.ReadToDescendant("Entity"))
                     {
-                        string name = Convert.ToString(xmlReader.GetAttribute("Name"));
-                        int Var = 0;//divides all the xml stuffper entity and adds them back into the array
+                        int Var = 0;//divides all the xml stuff per entity and adds them back into the array
                         string Description = "", IFF = "", Shape = "", Start = "", Mid = "", End = "", Name = "";
-                        if (xmlReader.ReadToDescendant("Entity"))
-                        {
                             do
                             {
                                 if (Var == 0)
@@ -272,7 +270,6 @@ namespace xml_flyboy_converter
                                 else if (Var == 3)
                                 {
                                     Start = Convert.ToString(xmlReader.GetAttribute("Start"));
-
                                 }
                                 else if (Var == 4)
                                 {
@@ -281,19 +278,14 @@ namespace xml_flyboy_converter
                                 else if (Var == 5)
                                 {
                                     End = Convert.ToString(xmlReader.GetAttribute("End_Point"));
-                                    MessageBox.Show(name + End + Mid + Start + Shape + IFF + Description);
-                                    //Name = Convert.ToString(xmlReader);
-                                    ////Name = Convert.ToString(xmlReader.LocalName);//gets "Entity" rather than the actual name
-                                    ////Name = Convert.ToString(xmlReader.GetAttribute("Name"));
-                                    //MessageBox.Show(Name + End + Mid + Start + Shape + IFF + Description);
+                                    //MessageBox is here to show develeper that it is loading everything correctly
+                                    //MessageBox.Show(lblLoadName.Text + End + Mid + Start + Shape + IFF + Description);
                                 }
                                 Var++;
                             } while (xmlReader.ReadToNextSibling("Entity"));
-                        }
                     }
                 }
             }
         }
-
     }
 }
