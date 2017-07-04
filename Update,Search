@@ -1,0 +1,306 @@
+using System;
+using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace xml_flyboy_converter
+{
+    public partial class frmSearch : Form
+    {
+        public frmSearch()
+        {
+            InitializeComponent();
+            ArrayLoader();//loads array from file
+            lstPOPAll();//loads lstbox with everything
+            MessageBox.Show("If any changes are to be made, be sure to press the Exit menu bar option when done making the changes, else your changes will not be saved.");
+        }
+        private void Reload()
+        {
+            Array.Resize<int>(ref Point, 0);
+            Array.Resize<int>(ref Line, 0);
+            Array.Resize<int>(ref Circle, 0);
+            Array.Resize<int>(ref RaceTrack, 0);
+            Array.Resize<int>(ref Figure8, 0);
+            Array.Resize<string>(ref Wrex, 0);
+            Wrex = File.ReadAllLines(@"C:\Users\jangovhett\Documents\Visual Studio 2015\Projects\xml flyboy converter\xml flyboy converter\bin\Debug\Search Folder\SearchFile.txt");
+            ArrayLoader();
+        }
+        string[] Wrex = File.ReadAllLines(@"C:\Users\jangovhett\Documents\Visual Studio 2015\Projects\xml flyboy converter\xml flyboy converter\bin\Debug\Search Folder\SearchFile.txt");
+        int[] Point = new int[0]; int[] Circle = new int[0]; int[] Line = new int[0]; int[] RaceTrack = new int[0]; int[] Figure8 = new int[0]; int[] Unk = new int[0];
+        private void ArrayLoader()
+        {
+            for (int j = 0; j < Wrex.Length; ++j)
+            {
+                string[] lines = Regex.Split(Wrex[j], "♥");
+                int Count = 0;
+                foreach (string line in lines)
+                {
+                    if (Count == 3)
+                    {//sets shape
+                        if (line == "Point")
+                        {
+                            Array.Resize<int>(ref Point, Point.Length + 1);
+                            Point[Point.Length - 1] = j;
+                            //MessageBox.Show(Convert.ToString(Point[Point.Length-1]));//shows the value stored in the array to make sure it pulls correctly
+                        }
+                        else if (line == "Line")
+                        {
+                            Array.Resize<int>(ref Line, Line.Length + 1);
+                            Line[Line.Length - 1] = j;
+                        }
+                        else if (line == "Circle")
+                        {
+                            Array.Resize<int>(ref Circle, Circle.Length + 1);
+                            Circle[Circle.Length - 1] = j;
+                        }
+                        else if (line == "Egg Track")
+                        {
+                            Array.Resize<int>(ref RaceTrack, RaceTrack.Length + 1);
+                            RaceTrack[RaceTrack.Length - 1] = j;
+                        }
+                        else if (line == "8-Loop")
+                        {
+                            Array.Resize<int>(ref Figure8, Figure8.Length + 1);
+                            Figure8[Figure8.Length - 1] = j;
+                        }
+                        else
+                        {//if no shape is found
+                            Array.Resize<int>(ref Unk, Unk.Length + 1);
+                            Unk[Unk.Length - 1] = j;
+                        }
+                    }
+                    Count++;//this is the value divider
+                }
+            }
+        }
+        private void lstPOPAll()
+        {
+            lstAll.Items.Clear();//clears it
+            //this is what populates the list box with everything
+            for (int s = 0; s < Wrex.Length; ++s)
+            {
+                lstAll.Items.Add(Wrex[s]);
+            }
+        }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {// searches for name or shape
+            if(rdoChecker.Checked!=true)
+            {
+                lstAll.Items.Clear();//clears list box
+                bool checker = false;
+                if (rdoName.Checked==true)
+                {//if Name
+                    for (int j=0; j<Wrex.Length;++j)
+                    {
+                        if (Wrex[j].StartsWith(txtInput.Text)==true)
+                        {
+                            lstAll.Items.Add(Wrex[j]);
+                            checker = true;
+                        }
+                    }
+                    if(checker!=true)//if the query doesnt match name in the new array do this
+                    {
+                        lstPOPAll();
+                    }
+                }
+                else if(rdoShape.Checked==true)
+                {//If Shape
+                    if (cmbSIShape.SelectedIndex == 0)
+                    {//point
+                        for (int j = 0; j < Point.Length; ++j)
+                        {
+                            lstAll.Items.Add(Wrex[Point[j]]);
+                            checker = true;
+                        }
+                    }
+                    else if (cmbSIShape.SelectedIndex == 1)
+                    {//Line
+                        for (int j = 0; j < Line.Length; ++j)
+                        {
+                            lstAll.Items.Add(Wrex[Line[j]]);
+                            checker = true;
+                        }
+                    }
+                    else if (cmbSIShape.SelectedIndex == 2)
+                    {//Circle
+                        for (int j = 0; j < Circle.Length; ++j)
+                        {
+                            lstAll.Items.Add(Wrex[Circle[j]]);
+                            checker = true;
+                        }
+                    }
+                    else if (cmbSIShape.SelectedIndex == 3)
+                    {//RaceTrack
+                        for (int j = 0; j < RaceTrack.Length; ++j)
+                        {
+                            lstAll.Items.Add(Wrex[RaceTrack[j]]);
+                            checker = true;
+                        }
+                    }
+                    else if (cmbSIShape.SelectedIndex == 4)
+                    {//Figure8
+                        for (int j = 0; j < Figure8.Length; ++j)
+                        {
+                            lstAll.Items.Add(Wrex[Figure8[j]]);
+                            checker = true;
+                        }
+                    }
+                    if (checker != true)//if the query doesnt match shape in the new array do this
+                    {
+                        lstPOPAll();
+                    }
+                }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstAll.SelectedIndex!=-1)
+            {
+                if (lstAll.Items.Count==Wrex.Length)
+                {
+                    string d = Wrex[lstAll.SelectedIndex];
+                    for (int j=lstAll.SelectedIndex;j<Wrex.Length;++j)
+                    {//overwrites one place ahead
+                        if (j + 1 < Wrex.Length)
+                        {
+                            Wrex[j] = Wrex[j + 1];
+                        }
+                    }
+                    Wrex[Wrex.Length - 1] = d;//saves the text to be deleted in the last place
+                    Array.Resize<string>(ref Wrex, Wrex.Length - 1);//removes last entry
+                    Save();
+                    Reload();
+                    lstPOPAll();
+                    lstAll.SelectedIndex = -1;
+                    MessageBox.Show("Deletion succesful");
+                }
+            }
+        }
+        private void Save()
+        {
+            //Saves the file, its my way of updating the text file so that when you return to the
+            //main form, you have the up to date one readily available
+            File.WriteAllLines(@"C:\Users\jangovhett\Documents\Visual Studio 2015\Projects\xml flyboy converter\xml flyboy converter\bin\Debug\Search Folder\SearchFile.txt", Wrex);
+        }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (lstAll.SelectedIndex != -1)
+            {
+                if (lstAll.Items.Count==Wrex.Length)
+                {
+                    string s = "";
+                    string IFF = Convert.ToString(cmbSIFF.SelectedItem);
+                    string Shape = Convert.ToString(cmbSShape.SelectedItem);
+                    string Mid = Convert.ToString(cmbSMid.SelectedItem);
+                    if (Mid == "")
+                    {
+                        Mid = "None";
+                    }
+                    foreach (var item in cmbSMid.Items)
+                    {
+                        s += item + "✓";
+                    }
+                    Wrex[lstAll.SelectedIndex] = String.Format("{0}♥{1}♥{2}♥{3}♥{4}♥{5}♥{6}", txtSName.Text, txtSDesc.Text, IFF, Shape, txtSLat.Text, s, txtSLon.Text);
+                    int d = lstAll.SelectedIndex;
+                    Save();
+                    Reload();
+                    lstPOPAll();
+                    lstAll.SelectedIndex = d;
+                    MessageBox.Show("Update succesful");
+                }
+            }
+        }
+
+        private void FieldUpdate(object sender, EventArgs e)
+        {
+            if (lstAll.SelectedIndex != -1)
+            {//when index value changes to anything but -1
+                grpUpdate.Visible = true;
+                cmbSMid.Items.Clear();
+                string s = Wrex[lstAll.SelectedIndex];
+                string[] lines = Regex.Split(s, "♥");
+                int Count = 0, max = 0;//count is what seperates the different text values, max seperates the midpoints
+                foreach (string line in lines)
+                {
+                    if (Count == 0)
+                    {//sets the name
+                        txtSName.Text = line;
+                    }
+                    else if (Count == 1)
+                    {//sets description
+                        txtSDesc.Text = line;
+                    }
+                    else if (Count == 2)
+                    {//sets IFF
+                        cmbSIFF.SelectedItem = line;
+                    }
+                    else if (Count == 3)
+                    {//sets shape
+                        cmbSShape.SelectedItem = line;
+                    }
+                    else if (Count == 4)
+                    {//sets start point
+                        txtSLat.Text = line;
+                    }
+                    else if (Count == 5)
+                    {//sets mid points
+                        string[] MidArray = Regex.Split(line, "✓");
+                        foreach (string point in MidArray)
+                        {
+                            cmbSMid.Items.Add(point);
+                            max++;
+                        }
+                        cmbSMid.SelectedIndex = max - 1;//selects the blank value at the bottom
+                        cmbSMid.Items.Remove(cmbSMid.SelectedText);//removes the blank value
+                        cmbSMid.SelectedIndex = -1;//selects the first value
+                    }
+                    else if (Count == 6)
+                    {//set end point
+                        txtSLon.Text = line;
+                    }
+                    Count++;//this is the value divider
+                }
+            }
+            else
+            {//hides the thing when -1
+                grpUpdate.Visible = false;
+            }
+        }
+
+        private void rdoShape_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbSIShape.Visible = true;
+            txtInput.Visible = false;
+            grpUpdate.Visible = false;
+            cmbSIShape.SelectedIndex = -1;
+            txtInput.Text = "";
+        }
+
+        private void rdoName_CheckedChanged(object sender, EventArgs e)
+        {
+            grpUpdate.Visible = false;
+            cmbSIShape.Visible = false;
+            txtInput.Visible = true;
+            cmbSIShape.SelectedIndex = -1;
+            txtInput.Text = "";
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Save();
+        }
+
+        private void btnSAdd_Click(object sender, EventArgs e)
+        {
+            cmbSMid.Items.Add(cmbSMid.Text);
+        }
+
+        private void btnSSub_Click(object sender, EventArgs e)
+        {
+            cmbSMid.Items.Remove(cmbSMid.SelectedItem);
+            cmbSMid.SelectedIndex = -1;
+        }
+    }
+}
