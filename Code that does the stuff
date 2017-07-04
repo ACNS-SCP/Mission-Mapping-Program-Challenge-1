@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace xml_flyboy_converter
 {
@@ -16,6 +17,7 @@ namespace xml_flyboy_converter
         private void btnSave_Click(object sender, EventArgs e)
         {//saves the entry
             XmlWriter xmlWriter = XmlWriter.Create("Conversion_doc1234.xml");//instantiates the creation of .xml
+
             xmlWriter.WriteStartDocument();//calls method that starts doc creation
             xmlWriter.WriteStartElement("Saved_Entries");
             for (int SavetheGoods = 0; SavetheGoods < Zebra.Length; SavetheGoods++)
@@ -23,7 +25,7 @@ namespace xml_flyboy_converter
                 string name = "", start = "", end = "", descri = "", shape = "", iff = "";//Variables for what they are
                 string mids = "";//seperated because it bitched abut being an unassigned value
                 string[] lines = Regex.Split(Zebra[SavetheGoods], "♥");
-                int Count=0, max = 0;//count is what seperates the different text values, max seperates the midpoints
+                int Count=0;//count is what seperates the different text values
                 foreach (string line in lines)
                 {
                     xmlWriter.WriteStartElement("Entity");
@@ -63,8 +65,7 @@ namespace xml_flyboy_converter
                         string[] MidArray = Regex.Split(line, "✓");
                         foreach (string point in MidArray)
                         {
-                            mids = mids + "✓" + (point);
-                            max++;
+                            mids = mids + point+ "✓";
                         }
                         xmlWriter.WriteAttributeString("Middle_Points", mids);
                         xmlWriter.WriteEndElement();
@@ -76,7 +77,6 @@ namespace xml_flyboy_converter
                         xmlWriter.WriteEndElement();
                         xmlWriter.WriteString("");
                         xmlWriter.WriteEndElement();
-                        //xmlWriter.WriteEndElement();
                         mids = "";//resets mid values
                     }
                     Count++;
@@ -84,6 +84,7 @@ namespace xml_flyboy_converter
             }
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
+            ClearForm();
         }
         string[] Zebra = new string[0];
         int d=1;
@@ -151,7 +152,7 @@ namespace xml_flyboy_converter
 
         private void btnNext_Click(object sender, EventArgs e)
         {//Next
-            if (PageTurner+1 != Zebra.Length)
+            if (PageTurner+1 != Zebra.Length&&Zebra.Length!=0)
             {
                 ClearForm();
                 PageTurner++;
@@ -173,18 +174,18 @@ namespace xml_flyboy_converter
 
         private void btnFirst_Click(object sender, EventArgs e)
         {//First
-            if (PageTurner - 1 != -1)
-            {
-                ClearForm();
-                String PageView = Zebra[0];
-                ArraySplicer(PageView);
                 PageTurner = 0;
-            }
+                ClearForm();
+                if (Zebra.Length!=0)
+                {
+                    String PageView = Zebra[0];
+                    ArraySplicer(PageView);
+                }
         }
         private void ArraySplicer(string Splice)
         {//sets the current page to correct values
             string[] lines = Regex.Split(Splice, "♥");
-            int Count = 0, max = 0;//count is what seperates the different text values, max seperates the midpoints
+            int Count = 0;//count is what seperates the different text values
             foreach (string line in lines)
             {
                 if (Count == 0)
@@ -212,11 +213,13 @@ namespace xml_flyboy_converter
                     string[] MidArray = Regex.Split(line, "✓");
                     foreach (string point in MidArray)
                     {
-                        cmbMid.Items.Add(point);
-                        max++;
+                        if (point != "")
+                        {
+                            cmbMid.Items.Add(point);
+                        }
                     }
-                    cmbMid.SelectedIndex = max - 1;//selects the blank value at the bottom
-                    cmbMid.Items.Remove(cmbMid.SelectedText);//removes the blank value
+                    //cmbMid.SelectedIndex = max - 1;//selects the blank value at the bottom
+                    //cmbMid.Items.Remove(cmbMid.SelectedText);//removes the blank value
                     cmbMid.SelectedIndex = -1;//selects the first value
                 }
                 else if (Count == 6)
@@ -227,20 +230,18 @@ namespace xml_flyboy_converter
                 Count++;//this is the value divider
             }
         }
-
+        
         private void viewStoredDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string ShowMetheMoney = "";
-            for (int View=0; View<Zebra.Length; View++)
-            {
-                ShowMetheMoney = ShowMetheMoney+"\r\n"+Convert.ToString(Zebra[View]);
-            }
-            MessageBox.Show(ShowMetheMoney);
+            File.WriteAllLines(@"C:\Users\jangovhett\Documents\Visual Studio 2015\Projects\xml flyboy converter\xml flyboy converter\bin\Debug\Search Folder\SearchFile.txt", Zebra);
+            frmSearch Search = new frmSearch();
+            Search.ShowDialog();
+            ArrayLoader();//this populates the array
         }
 
         private void mnuOpen_Click(object sender, EventArgs e)
         {
-            Array.Clear(Zebra, 0, Zebra.Length);
+            Array.Resize<string>(ref Zebra, 0);//resizes array to 0
             XmlReader xmlReader = XmlReader.Create("Conversion_doc1234.xml");
             while (xmlReader.Read())
             {
@@ -252,7 +253,7 @@ namespace xml_flyboy_converter
                     if (xmlReader.ReadToDescendant("Entity"))
                     {
                         int Var = 0;//divides all the xml stuff per entity and adds them back into the array
-                        string Description = "", IFF = "", Shape = "", Start = "", Mid = "", End = "", Name = "";
+                        string Description = "", IFF = "", Shape = "", Start = "", Mid = "", End = ""/*, Name = ""*/;
                             do
                             {
                                 if (Var == 0)
@@ -270,6 +271,7 @@ namespace xml_flyboy_converter
                                 else if (Var == 3)
                                 {
                                     Start = Convert.ToString(xmlReader.GetAttribute("Start"));
+
                                 }
                                 else if (Var == 4)
                                 {
@@ -278,14 +280,28 @@ namespace xml_flyboy_converter
                                 else if (Var == 5)
                                 {
                                     End = Convert.ToString(xmlReader.GetAttribute("End_Point"));
-                                    //MessageBox is here to show develeper that it is loading everything correctly
-                                    //MessageBox.Show(lblLoadName.Text + End + Mid + Start + Shape + IFF + Description);
-                                }
+                                    Array.Resize<string>(ref Zebra, Zebra.Length + 1);
+                                    Zebra[Zebra.Length - 1] = string.Format("{0}♥{1}♥{2}♥{3}♥{4}♥{5}♥{6}", Name, Description, IFF, Shape, Start, Mid, End);
+                            }
                                 Var++;
                             } while (xmlReader.ReadToNextSibling("Entity"));
                     }
                 }
             }
+        }
+
+        private void mnuHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp Help = new frmHelp();
+            Help.Show();
+        }
+        private void ArrayLoader()
+        {//loads array with the new stuff
+            ClearForm();//clears form
+            PageTurner = 0;
+            Array.Resize<string>(ref Zebra, 0);//Clears array
+            Zebra = File.ReadAllLines(@"C:\Users\jangovhett\Documents\Visual Studio 2015\Projects\xml flyboy converter\xml flyboy converter\bin\Debug\Search Folder\SearchFile.txt");
+            PageTurner = 1;
         }
     }
 }
