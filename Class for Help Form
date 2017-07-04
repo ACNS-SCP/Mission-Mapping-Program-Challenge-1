@@ -1,0 +1,23 @@
+using System;
+using System.Windows.Forms;
+
+namespace xml_flyboy_converter
+{
+    public partial class frmHelp : Form
+    {
+        string[] Help_Files = new string[5];
+        public frmHelp()
+        {
+            InitializeComponent();
+            Help_Files[0] = "To enter a point, type in an unique name, shape, beginning point is the x-coordinate, end point is the y-coordinate, and the mid point is the altitude.";
+            Help_Files[1] = "To enter a circle, type in an unique name, shape, beginning point, and the end point is the radius.";
+            Help_Files[2] = "To enter a line, type in an unique name, shape, beginning point, end point, and all mid point(s).";
+            Help_Files[3] = "To enter a Race Track, type in an unique name, shape, beginning point is the x-coordinate, end point is the y-coordinate, and the mid point is the altitude.";
+            Help_Files[4] = "To enter a Figure 8, type in an unique name, shape, beginning point is the x-coordinate, end point is the y-coordinate, and the mid point is the altitude.";
+        }
+        private void Help(object sender, EventArgs e)
+        {
+            textHelp.Text = Convert.ToString(Help_Files[lstHelp.SelectedIndex]);
+        }
+    }
+}
